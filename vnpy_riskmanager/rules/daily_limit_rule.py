@@ -93,6 +93,7 @@ class DailyLimitRule(RuleTemplate):
             self.total_order_count += 1
 
             self.contract_order_count[order.vt_symbol] += 1
+            self.write_log(f"当天委托总数：{self.total_order_count}，当天撤单总数：{self.total_cancel_count}")
 
             self.put_event()
         elif (
@@ -103,6 +104,7 @@ class DailyLimitRule(RuleTemplate):
             self.total_cancel_count += 1
 
             self.contract_cancel_count[order.vt_symbol] += 1
+            self.write_log(f"当天委托总数：{self.total_order_count}，当天撤单总数：{self.total_cancel_count}")
 
             self.put_event()
 

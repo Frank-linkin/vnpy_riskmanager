@@ -96,6 +96,7 @@ cdef class DailyLimitRuleCy(RuleTemplate):
             self.all_orderids.add(vt_orderid)
             self.total_order_count += 1
             self.contract_order_count[vt_symbol] += 1
+            self.write_log(f"当天委托总数：{self.total_order_count}，当天撤单总数：{self.total_cancel_count}")
             self.put_event()
         elif (
             order.status == Status.CANCELLED
@@ -104,6 +105,7 @@ cdef class DailyLimitRuleCy(RuleTemplate):
             self.cancel_orderids.add(vt_orderid)
             self.total_cancel_count += 1
             self.contract_cancel_count[vt_symbol] += 1
+            self.write_log(f"当天委托总数：{self.total_order_count}，当天撤单总数：{self.total_cancel_count}")
             self.put_event()
 
     cpdef void on_trade(self, object trade):
